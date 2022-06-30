@@ -1,0 +1,11 @@
+.form-group{
+    margin-bottom: 10px;
+    text-align: left;
+}
+.item{
+    display: flex;
+    justify-content: space-around;
+}
+.error{
+    color: red
+}

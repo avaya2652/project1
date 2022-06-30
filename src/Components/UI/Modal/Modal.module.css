@@ -1,0 +1,34 @@
+.backdrop{
+    width: 100%;
+height: 100%;
+position: fixed;
+background-color: #333333;
+opacity: .6;
+}
+.modal_wrapper{
+    position: relative;
+    width: 40%;
+    border-radius: 10px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    top:2rem;
+}
+.modal_wrapper .card_wrapper{
+    padding:0px ;
+}
+.header{
+    /* padding: 9px 0px; */
+    text-align: center;
+    background-color: blueviolet;
+    border-radius: 10px 10px 0px 0px;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+}
+.body{
+    text-align: center;
+    padding: 20px;
+}
+.close_me{
+    cursor: pointer;
+}
