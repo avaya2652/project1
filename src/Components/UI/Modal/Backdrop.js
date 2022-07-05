@@ -1,9 +1,12 @@
 import React from "react";
 import styles from './Modal.module.css';
 
-const Backdrop = () =>{
+const Backdrop = (props) =>{
+    const clickHandler = () =>{
+        props.onClick(true)
+    }
     return(
-        <div className={styles.backdrop}></div>
+        <div className={styles.backdrop} onClick={clickHandler}></div>
     )
 }
 

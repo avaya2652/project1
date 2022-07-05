@@ -6,12 +6,15 @@ background-color: #333333;
 opacity: .6;
 }
 .modal_wrapper{
-    position: relative;
-    width: 40%;
+    position: fixed;
+     width: 40%; 
     border-radius: 10px;
-    margin: 0 auto;
     background-color: #ffffff;
-    top:2rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top:20%;
+
+    
 }
 .modal_wrapper .card_wrapper{
     padding:0px ;
