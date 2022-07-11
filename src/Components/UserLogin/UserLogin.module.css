@@ -1,0 +1,22 @@
+.form_group{
+    /* border:1px soli #ffccff; */
+    display: flex;
+    margin-bottom: 10px;
+}
+.form_controls{
+    padding:2px;
+    width: 70%;
+}
+.form_controls input{
+    width: 90%;
+    padding: 5px;
+    border: 1px solid #cccccc
+}
+.form_controls input:focus{
+    background-color: salmon;
+    border: 1px solid #000000;
+}
+.label{
+    width: 30%;
+    text-align: left;
+}

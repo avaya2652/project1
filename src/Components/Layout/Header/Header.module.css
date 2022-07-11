@@ -1,0 +1,12 @@
+.header{
+    width:100%;
+    background-color: rgb(66, 5, 122);
+    padding:7px;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+}
+p{
+    color:#ffffff;
+    font-size: 19px;
+    font-weight: bold;
+}

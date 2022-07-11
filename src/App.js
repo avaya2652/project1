@@ -1,23 +1,30 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import Header from './Components/Layout/Header/Header';
+import UserLogin from './Components/UserLogin/UserLogin';
+import Welcome from './Components/Welcome/Welcome';
 
 function App() {
+  const [user, setUser] = useState({})
+  const formSubmitHandler = (e) =>{
+    const userDetails = JSON.parse(localStorage.getItem('user'));
+    setUser(userDetails);
+  }
+  useEffect(()=>{
+    const userDetails = JSON.parse(localStorage.getItem('user'));
+      console.log(userDetails);
+      setUser(userDetails);
+  },[])
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header>
+        Section 10 Lesson
+      </Header>
+      <div>
+        {!user && <UserLogin onSubmit={formSubmitHandler}></UserLogin>}
+        {user && <Welcome user = {user.email}></Welcome>}
+      </div>
     </div>
   );
 }
