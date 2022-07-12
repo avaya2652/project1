@@ -1,0 +1,12 @@
+.manu_container{
+    width:50%;
+}
+
+.menu_items{
+    display: flex;
+    list-style: none;
+}
+.menu_item{
+    color: #ffffff;
+    padding: 2px 16px;
+}

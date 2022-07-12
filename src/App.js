@@ -1,30 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import './App.css';
 import Header from './Components/Layout/Header/Header';
+import Menu from './Components/Menu/Menu';
 import UserLogin from './Components/UserLogin/UserLogin';
 import Welcome from './Components/Welcome/Welcome';
+import AuthContext from './Store/auth-context';
+
 
 function App() {
-  const [user, setUser] = useState({})
-  const formSubmitHandler = (e) =>{
-    const userDetails = JSON.parse(localStorage.getItem('user'));
-    setUser(userDetails);
-  }
-  useEffect(()=>{
-    const userDetails = JSON.parse(localStorage.getItem('user'));
-      console.log(userDetails);
-      setUser(userDetails);
-  },[])
   
+  const contx = useContext(AuthContext);
   return (
     <div className="App">
-      <Header>
-        Section 10 Lesson
-      </Header>
-      <div>
-        {!user && <UserLogin onSubmit={formSubmitHandler}></UserLogin>}
-        {user && <Welcome user = {user.email}></Welcome>}
-      </div>
+        <Header>
+          <p>Section 10 Lesson</p>
+          <Menu ></Menu>
+        </Header>
+        <div>
+          {!contx.isLogin && <UserLogin onSubmit={contx.loginHandler}></UserLogin>}
+          {contx.isLogin && <Welcome user = {contx.userDetails.email} ></Welcome>}
+        </div>
     </div>
   );
 }

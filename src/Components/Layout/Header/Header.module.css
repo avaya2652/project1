@@ -4,6 +4,8 @@
     padding:7px;
     box-sizing: border-box;
     margin-bottom: 5px;
+    display: flex;
+justify-content: space-between;
 }
 p{
     color:#ffffff;

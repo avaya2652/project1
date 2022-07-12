@@ -1,31 +1,67 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer, useState, useRef } from 'react';
 import Button from '../UI/Button/Button';
 import Card from '../UI/Card/Card';
 import Input from '../UI/Input/Input';
 import styles from './UserLogin.module.css';
-import { useRef } from 'react';
+// import { useRef } from 'react';
+
+const loginReducer = (state, action) =>{
+    if(action.type==='EMAIL_VALUE'){
+        // console.log(state, action)
+        return{
+            ...state,
+            emailValue: action.value,
+            isEmailValid: action.value.includes('@')
+        }
+    }
+    if(action.type==='PASSWORD_VALUE'){
+        return{
+            ...state,
+            passwordValue: action.value,
+            isPasswordValid: action.value.trim().length >=6
+        }
+    }
+    return {
+        emailValue:'',
+        isEmailValid: false,
+        passwordValue:'',
+        isPasswordValid: false
+    }
+}
 
 const UserLogin = (props) =>{
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    // const [email, setEmail] = useState('');
+    // const [password, setPassword] = useState('');
     const [isValid, setIsvalid] = useState(true);
 
+    const initialState = {
+        emailValue:'',
+        isEmailValid: false,
+        passwordValue:'',
+        isPasswordValid: false
+    }
+
+    const [state, dispatchAction] = useReducer(loginReducer,initialState)
+
     const emailChangeHandler = (e) =>{
-        setEmail(e.target.value)
+        // setEmail(e.target.value)
+        dispatchAction({type:'EMAIL_VALUE', value: e.target.value})
     }
     const passwordChangeHandler = (e) =>{
-        setPassword(e.target.value)
+        // setPassword(e.target.value)
+        dispatchAction({type:'PASSWORD_VALUE', value: e.target.value})
+
     }
 
     useEffect(()=>{
-        console.log('inside effect');
-        // setIsvalid(email.trim().length>0 && password.trim().length>4)
+        // console.log('inside effect');
+        setIsvalid(state.isEmailValid && state.isPasswordValid)
         return ()=>{
-            console.log('cleanup');
+            // console.log('cleanup');
         };
-    },[password])
+    },[state.isEmailValid,state.isPasswordValid])
 
     const userLoginHandler = (e)=>{
         e.preventDefault();
@@ -41,7 +77,8 @@ const UserLogin = (props) =>{
                         <label>Email</label>
                     </div>
                     <div className={styles['form_controls']}>
-                        <Input type="text" name="email" value={email} ref={emailRef} onChange={emailChangeHandler} />
+                        {!state.isEmailValid && <p className={styles.errorMessage}>NOt a valid email</p>}
+                        <Input type="text" name="email" value={state.emailValue} ref={emailRef} onChange={emailChangeHandler} />
                         {/* <input  type="text" /> */}
                     </div>
                 </div>
@@ -50,7 +87,9 @@ const UserLogin = (props) =>{
                         <label>Password</label>
                     </div>
                     <div className={styles['form_controls']}>
-                        <Input type="password" value={password} name="password"ref={passwordRef} onChange={passwordChangeHandler}  />
+                    {!state.isPasswordValid && <p className={styles.errorMessage}>NOt a valid password</p>}
+
+                        <Input type="password" value={state.passwordValue} name="password"ref={passwordRef} onChange={passwordChangeHandler}  />
                     </div>
                 </div>
                 <div className={styles['form_group']}>

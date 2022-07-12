@@ -1,11 +1,12 @@
 import React from "react";
+// import Menu from "../../Menu/Menu";
 
 import styles from './Header.module.css';
 
 const Header = (props)=>{
     return(
         <div className={styles.header}>
-            <p>{props.children}</p>
+            {props.children}
         </div>
     )
 }
