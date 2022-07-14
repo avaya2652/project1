@@ -1,0 +1,30 @@
+.form_controls input {
+    width: 90%;
+    padding: 5px;
+    border: 1px solid #cccccc
+}
+.form_controls .error{
+    border: 1px solid rgb(248, 11, 11);
+    background-color: salmon;
+}
+.error_message{
+    color: rgb(188, 15, 15);
+    font-size: 12px;
+}
+.label{
+    width: 30%;
+    text-align: left;
+}
+.form_group{
+    /* border:1px soli #ffccff; */
+    display: flex;
+    margin-bottom: 10px;
+}
+.form_controls{
+    padding:2px;
+    width: 70%;
+}
+
+.message_wrapper{
+    height: 20px;
+}
