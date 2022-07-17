@@ -1,0 +1,30 @@
+.item_wrapper{
+    width: 100%;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #cccccc;
+    display: flex;
+    justify-content: space-between;
+}
+.item_info{
+    width:70%;
+    color: #000000;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: left;
+}
+.item_info p{
+    margin: 5px;
+}
+.item_action{
+    width: 30%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.item_name, .item_price{
+    font-weight: bold;
+    font-size: 14px;
+}
+.item_price{
+    color:#854C24;
+}

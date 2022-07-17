@@ -1,0 +1,9 @@
+.total {
+    text-align: right;
+    color:#111111;
+    font-style: italic;
+}
+.total span{
+    font-weight: bold;
+
+}

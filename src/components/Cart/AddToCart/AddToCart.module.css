@@ -1,0 +1,16 @@
+.addToCart_wrapper{
+    width: min-content;
+}
+.addToCart_wrapper .text {
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+.input{
+    border: 1px solid #cccccc;
+    padding:0 6px;
+    width:19%
+}
+.add_qty{
+    margin-bottom: 6px;;
+}

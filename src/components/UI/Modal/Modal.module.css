@@ -1,0 +1,29 @@
+.backdrop{
+
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background-color: red;
+    opacity: .8;
+    z-index: 98;
+
+}
+.modal_body{
+    position: absolute;
+    top:30%;
+    /* left: 50%; */
+    width: 100%;
+    z-index: 99;
+}
+.close{
+    text-align: center;
+}
+.close_header{
+    text-align: right;
+    
+}
+.close_header span{
+    cursor: pointer;
+    padding:5px;
+    display: inline;
+}
