@@ -1,10 +1,35 @@
-import React from "react";
+import React, { useContext } from "react";
+import CartContext from "../../../store/cart-context";
 import classes from '../CheckoutItems/CheckoutItems.module.css';
+import Button from '../../UI/Button/Button'
+// import Modal from '../../UI/Modal/Modal';
 
 const CheckoutItems = (props) =>{
-    console.log(props);
-
+    const contx = useContext(CartContext);
+    // const [isModalOpen,setIsModalOpen] = useState(false);
+    // const closeHandler = ()=>{
+    //     setIsModalOpen(false);
+    // }
+    const incrementHandler = ()=>{
+        // contx.incrementQty(props.id)
+        contx.updateCartItems({
+            "id": props.id,
+            "name": props.name, 
+            "description": props.description,
+            "price": props.price,
+            "requestedQty":1,
+            "availableQty":props.availableQty,
+        })
+        
+    }
+    const decrementHandler = ()=>{
+        contx.decrementQty(props.id)
+    }
+    // console.log(props.id)
     return(
+        <>
+        {/* {(contx.quantityUpdateState.isButtonDisable) &&
+            <Modal onClick={closeHandler}>{contx.quantityUpdateState.msg}</Modal>} */}
         <div className={classes['checkout_wrapper']}>
             <div className={classes.name}>
                 {props.name}
@@ -17,10 +42,11 @@ const CheckoutItems = (props) =>{
                 {props.requestedQty * props.price}
             </div>
             <div className={classes['update_qty']}>
-                <div className={classes.increment} >+</div>
-                <div className={classes.decrement}>-</div>
+                <Button type="button" onClick={incrementHandler}>+</Button>
+                <Button type="button"  onClick={decrementHandler}>-</Button>
             </div>
         </div>
+        </>
     )
 }
 

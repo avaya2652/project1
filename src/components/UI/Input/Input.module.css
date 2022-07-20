@@ -1,0 +1,27 @@
+.input{
+    border:1px solid #cccccc;
+    padding:7px;
+    width:70%;
+}
+.form_label{
+    width:40%
+}
+.form_input{
+    width: 70%;
+}
+.form_group{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+.error_msg{
+    margin: 0px;
+    padding: 0px;
+    color: red;
+    font-size: 13px;
+    font-weight: 600;
+}
+.msg{
+    height:12px;
+}

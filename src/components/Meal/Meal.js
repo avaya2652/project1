@@ -21,11 +21,13 @@ const Meal = () =>{
         <div className={classes['meal_wrapper']}>
             <Card>
                 {mealsItems.map((item,index)=>{
+                    // console.log(item);
                     return <Item name={item.name} 
                             description={item.description} 
                             price={item.price} 
                             id={item.id} 
                             key={item.id}
+                            availableQty={+item.availableQty}
                         />
                 })}
             </Card>

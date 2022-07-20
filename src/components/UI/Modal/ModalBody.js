@@ -1,7 +1,7 @@
 import React from "react";
 import Card from '../Card/Card';
 import classes from './Modal.module.css';
-import Button from '../Button/Button'
+// import Button from '../Button/Button'
 
 const ModalBody=(props)=>{
     return(
@@ -11,9 +11,9 @@ const ModalBody=(props)=>{
                 <span>X</span>
             </div>
                 {props.children}
-            <div className={classes.close}>
+            {/* <div className={classes.close}>
                 <Button onClick={props.onClick} type='button'>Close</Button>
-            </div>
+            </div> */}
          </Card>
         </div>
     )

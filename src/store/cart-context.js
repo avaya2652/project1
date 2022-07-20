@@ -4,8 +4,7 @@ const CartContext = React.createContext({
     totalOrderedItem: 0,
     addedCartItems:[],
     updateCartItems: ()=>{},
-    openCartItems:()=>{},
-    openModal: false
+    decrementQty:(id)=>{}
 })
 
 export default CartContext;
@@ -13,7 +12,7 @@ export default CartContext;
 export const CartContextProvider = (props) =>{
     const [cartList, setCartList] = useState([]);
     const [totalOrderd, setTotalOrderedItem] = useState(0);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+
 
     useEffect(()=>{
         let total = cartList.reduce(function(prev, cur) {
@@ -23,6 +22,7 @@ export const CartContextProvider = (props) =>{
     },[cartList])
     
     const updateCartItemsHandler=(item)=>{
+        
         if(cartList.length!==0){
             setCartList((prevState)=>{
                 const matchedItem =prevState.findIndex(ele=>ele.id === item.id);
@@ -38,20 +38,21 @@ export const CartContextProvider = (props) =>{
                 return [...prev, item]
             });
         }
-
-
-
-        
-
-        // setTotalOrderedItem(1, cartList)
     }
 
-    
+    const decrementQtyHandler = (id) =>{
+        setCartList((prevState)=>{
+            let indx = prevState.findIndex(item=>item.id === id);
 
-    const openCartItemsHandler=()=>{
-        console.log(cartList)
-        setIsModalOpen(true);
+            if(prevState[indx].requestedQty ===1){
+               let leftItems = prevState.filter(item=> item.id !== prevState[indx].id);
+                return [...leftItems]
 
+            }
+            prevState[indx].requestedQty -= 1;
+            return [...prevState]
+
+        })
     }
 
     return(
@@ -59,8 +60,7 @@ export const CartContextProvider = (props) =>{
             {   addedCartItems: cartList, 
                 updateCartItems:updateCartItemsHandler, 
                 totalOrderedItem: totalOrderd,
-                openCartItems:openCartItemsHandler,
-                openModal:isModalOpen
+                decrementQty:decrementQtyHandler
             }}>
          {props.children}
        </CartContext.Provider>

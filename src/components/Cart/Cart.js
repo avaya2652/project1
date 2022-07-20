@@ -4,25 +4,37 @@ import cartImg from '../../assets/Images/cart.png'
 import CartContext from "../../store/cart-context";
 import Modal from '../UI/Modal/Modal';
 import Checkout from "../Checkout/Checkout";
+import Order from '../Order/Order'
 
 const Cart = () =>{
     // console.log(images)
-    const [isModalOpen,setIsModalOpen] = useState(false);
+    const [isCheckoutModalOpen,setIsCheckoutModalOpen] = useState(false);
     const contx = useContext(CartContext);
+    const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
     const closeHandler = ()=>{
-        setIsModalOpen(false);
-        console.log(121212);
+        setIsCheckoutModalOpen(false);
     }
 
     const openCartModalHandler = () =>{
-        setIsModalOpen(true);
+        setIsCheckoutModalOpen(true);
     }
-   
+
+    const openOrderModalHandler = ()=>{
+        setIsCheckoutModalOpen(false);
+        setIsOrderModalOpen(true);
+    }
+    const modalCloseHandler = () =>{
+        setIsOrderModalOpen(false);
+
+    }
     return(
         <div className={classes['cart_wrapper']}>
-            {isModalOpen && <Modal onClick={closeHandler}>
-                <Checkout/>
+            {isCheckoutModalOpen && <Modal onClick={closeHandler}>
+                <Checkout onClick= {openOrderModalHandler}/>
             </Modal>}
+            { isOrderModalOpen && <Modal onClick={modalCloseHandler}>
+                            <Order></Order>
+                        </Modal>}
             <div className={classes['cart_img']} onClick={openCartModalHandler}>
                 <img src={cartImg} alt="cart" />
                 <span>Your Cart</span>

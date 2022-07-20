@@ -20,6 +20,7 @@ margin: 2px 0px;
 .increment, .decrement{
     border: 1px solid #cccccc;
     padding: 2px 5px;
+    cursor: pointer;
 }
 .increment{
     margin-right: 10px;

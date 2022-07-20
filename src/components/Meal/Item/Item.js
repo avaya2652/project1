@@ -6,14 +6,15 @@ import classes from './Item.module.css';
 
 const Item=(props)=>{
     const contx = useContext(CartContext);
-
+    // console.log(props)
     const addToCartHandler =(requestedQty)=>{
         contx.updateCartItems({
             "id": props.id,
             "name": props.name, 
             "description": props.description,
             "price": props.price,
-            "requestedQty":+requestedQty
+            "requestedQty":+requestedQty,
+            "availableQty":props.availableQty,
         })
         // console.log(requestedQty)
     }
