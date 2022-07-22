@@ -1,0 +1,16 @@
+.movie{
+    background-color: #230052;
+    border-radius: 15px;
+    padding: 1rem;
+    margin: 1rem;
+    text-align: center;
+    color: white;
+}
+.title{
+    font-size: 2rem;
+    color: #f7e702
+}
+.desc{
+    color:#eccf77;
+    font-size: 1rem;
+}

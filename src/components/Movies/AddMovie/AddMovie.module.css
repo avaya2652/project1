@@ -1,0 +1,26 @@
+.form_wrapper{
+    margin: 1rem 0;
+}
+.controls{
+    margin:1rem 0
+}
+label{
+    text-align: left;
+    margin-bottom: .5rem;
+    display: block;
+}
+.form_wrapper input, .form_wrapper textarea{
+    width: 100%;
+    padding: 0.2rem;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    display: block;
+    box-sizing: border-box;
+}
+button{
+    background-color: rgb(49, 11, 85);
+    color: white;
+    padding: .5rem;
+    border-radius: 10px;
+    border: none;
+}

@@ -1,4 +1,5 @@
 import './App.css';
+import Movies from './components/Movies/Movies';
 
 function App() {
   return (
@@ -6,6 +7,10 @@ function App() {
       <header className="App-header">
         React app
       </header>
+      <section>
+
+        <Movies></Movies>
+      </section>
     </div>
   );
 }
