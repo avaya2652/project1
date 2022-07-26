@@ -1,4 +1,5 @@
 import './App.css';
+import Form from './component/Form/Form1';
 
 function App() {
   return (
@@ -6,6 +7,7 @@ function App() {
       <header className="App-header">
         React app
       </header>
+      <Form></Form>
     </div>
   );
 }

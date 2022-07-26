@@ -1,0 +1,11 @@
+button:disabled, button:disabled:hover, button:active{
+    background-color: #ccc;
+    border-color: #ccc;
+    color:rgb(91, 88, 88);
+    cursor:not-allowed
+}
+button{
+    background-color: blueviolet;
+    color: #fff;
+    border: 1px solid;
+}
