@@ -1,4 +1,5 @@
 import './App.css';
+import BasicForm from './component/BasicForm';
 import Form from './component/Form/Form1';
 
 function App() {
@@ -8,6 +9,10 @@ function App() {
         React app
       </header>
       <Form></Form>
+      <p></p>
+      <hr />
+      <p></p>
+      <BasicForm></BasicForm>
     </div>
   );
 }

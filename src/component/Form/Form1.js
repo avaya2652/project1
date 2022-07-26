@@ -4,7 +4,6 @@ import useInput from "../../hooks/use-input";
 
 const Form =()=>{
     const validateName = (name) =>{
-        console.log(name)
         if(name.trim().length<=3){
             return{
                 isValidationPassed: false,
@@ -58,18 +57,44 @@ const { inputValue: emailFieldValue,
     onchangeHandler: onEmailChangeHandler,
     reset:resetEmail} = useInput(validateEmail);
 
+
+
+    const validateRadio =(name)=>{
+        if(name.length ===0){
+            return{
+                isValidationPassed: false,
+                message: 'Please select a season'
+            }
+        } return{
+            isValidationPassed: true,
+            message: ''
+        }
+        
+    }
+
+    const { 
+        inputValue: seasonValue,
+        isInputValid: isSeasonValid,
+        errorMessage:seasonErrorMessage,
+        // onBlurHandler: onSeasonBlueHandler,
+        onchangeHandler: onSeasonChangeHandler,
+        reset:resetSeason} = useInput(validateRadio)
+
+
     let isFormValid = false;
 
-    if(isNameValid && isEmailValid){
+    if(isNameValid && isEmailValid && isSeasonValid){
         // console.log(isNameValid, isEmailValid)
         isFormValid = true;
     }
 
+
     const onSubmitHandler = (event) =>{
         event.preventDefault();
-        console.log(nameFieldValue, emailFieldValue)
+        console.log(nameFieldValue, emailFieldValue, seasonValue)
         resetEmail();
         resetName();
+        resetSeason();
     }
     return(
         <div className={classes['form_wrapper']}>
@@ -88,6 +113,24 @@ const { inputValue: emailFieldValue,
                         onBlur={onEmailBlueHandler} />
                        <p>{emailErrorMessage}</p>
                 </div>
+                <div className={classes['form_control']}>
+                    <p>{seasonErrorMessage}</p>
+                    <label>Favourite season:</label>
+                    <p><label>Summer:</label>
+                        <input type="radio" name="season" value="Summer" onChange={onSeasonChangeHandler}/>
+                    </p>
+                    <p><label>Spring:</label>
+                        <input type="radio" name="season" value="Spring" onChange={onSeasonChangeHandler}/>
+                    </p>
+                    <p><label>Winter:</label>
+                        <input type="radio" name="season" value="Winter" onChange={onSeasonChangeHandler}/>
+                    </p>
+                    <p><label>Autum:</label>
+                        <input type="radio" name="season" value="Autum" onChange={onSeasonChangeHandler}/>
+                    </p>
+                </div>
+                
+
                 <button type="submit" disabled={!isFormValid}>Submit</button>
             </form>
         </div>
