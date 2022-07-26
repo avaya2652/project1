@@ -1,34 +1,68 @@
-import {useState} from "react";
+import {useReducer, useState} from "react";
 
-const useInputPractice = (validation) =>{
-    const [inputValue, setInputValue] = useState('');
-    // const [isInputValid, setIsInputValid] = useState(false);
-    const [isInputTouched, setIsInputTouched] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('')
-
-    const {isValidationPassed, message} = validation(inputValue);
-
-    const onBlurHandler = ()=>{
-        if(!isValidationPassed){
-            setErrorMessage(message);
+const inputReducer = (state,action) =>{
+    switch(action.type){
+        case 'BLUR':{
+            console.log(action);
+            let msg = '';
+            if(!action.payLoad.isValidationPassed){
+                msg = action.payLoad.message;
+            }
+            return{
+                ...state,
+                errorMessage:msg
+            }
+        }
+        case 'CHANGE':{
+            console.log(action)
+             return{
+                ...state,
+                inputValue:action.payLoad.value,
+                isInputTouched:true,
+                errorMessage:''
+                
+            }
+        }
+        case 'RESET':{
+            return{
+                ...state,
+                inputValue: ''
+            }
         }
     }
 
+}
+
+const useInputPractice = (validation) =>{
+
+    let initialState = {
+        inputValue:'',
+        isInputTouched:false,
+        errorMessage:''
+    }
+    const [state, dispatch] = useReducer(inputReducer, initialState)
+
+    const {isValidationPassed, message} = validation(state.inputValue);
+
+    const onBlurHandler = ()=>{
+        dispatch({type:'BLUR', payLoad:{isValidationPassed:isValidationPassed, message:message}})
+    }
+
     const onChangeHandler = (e) =>{
-        setInputValue(e.target.value);
-        setIsInputTouched(true);
-        setErrorMessage('');
+        dispatch({type:'CHANGE', payLoad:
+                            {isValidationPassed:isValidationPassed, 
+                                message:message, 
+                                value: e.target.value
+                            }})
 
     }
     const reset = () =>{
-        setInputValue('');
-
+        dispatch({type:'RESET'})
     }
-    console.log(isValidationPassed);
     return{
-        errorMessage,
-        inputValue,
-        isInputTouched,
+        errorMessage: state.errorMessage,
+        inputValue: state.inputValue,
+        isInputTouched: state.isInputTouched,
         isInputValid: isValidationPassed,
         onBlurHandler,
         onChangeHandler,

@@ -85,7 +85,9 @@ const BasicForm = (props) => {
             isFormValid = true;
         }
     
-    const besicFormSubmitHandler = () =>{
+    const besicFormSubmitHandler = (event) =>{
+        event.preventDefault();
+
         console.log(fNameValue, lNameValue,emailValue);
         fNameReset()
         lNameReset()
@@ -94,7 +96,8 @@ const BasicForm = (props) => {
 
     }
     return (
-      <form>
+      <form onSubmit={besicFormSubmitHandler} >
+        <h1>Basic form</h1>
         <div className='control-group'>
           <div className='form-control'>
             <p className={classes.error}>{fNameError}</p>
@@ -122,7 +125,7 @@ const BasicForm = (props) => {
                 onChange={emailChangeHandler} />
         </div>
         <div className='form-actions'>
-          <button onSubmit={besicFormSubmitHandler} disabled={!isFormValid}>Submit</button>
+          <button disabled={!isFormValid}>Submit</button>
         </div>
       </form>
     );
