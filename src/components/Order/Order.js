@@ -1,8 +1,10 @@
-import React, { useReducer, useState } from "react";
+import React, { useContext, useReducer, useState } from "react";
+import useHttp from "../../hook/use-http";
+import CartContext from "../../store/cart-context";
 import Button from "../UI/Button/Button";
 import Card from '../UI/Card/Card';
 import Input from "../UI/Input/Input";
-// import classes from './Order.module.css';
+import classes from './Order.module.css';
 
 const orderReducer = (state, action)=>{
     switch(action.type){
@@ -70,6 +72,16 @@ const orderReducer = (state, action)=>{
 
 const Order = (props)=>{
     // const [orderFormValidity, setOrderFormValidity] = useState({})
+    const [message, setMessage] = useState('');
+    const contx = useContext(CartContext);
+    const manageOrderSubmittedData = (data)=>{
+        console.log(data)
+        if(data.name){
+            setMessage('Order placed')
+        }
+    }
+ 
+    const{errorMessage, isLoading, sendRequest:placeOrder} = useHttp(manageOrderSubmittedData)
     const [orderFormValue, setOrderFormValue] = useState({
         'name':'',
         'address1':'',
@@ -113,7 +125,17 @@ const Order = (props)=>{
     }
     const orderDataHandler = (e)=>{
         e.preventDefault();
-        console.log(orderFormValue);
+        // console.log(orderFormValue);
+        placeOrder({
+            URL:'https://react-movie-1a655-default-rtdb.firebaseio.com/orders.json', 
+            method:'POST',
+            headers: {
+                "access-control-allow-origin" : "*",
+                "Content-type": "application/json; charset=UTF-8"
+              },
+            body: {user:orderFormValue, cartItem: contx.addedCartItems}
+
+        })
         setOrderFormValue(
             {
                 'name':'',
@@ -128,6 +150,9 @@ const Order = (props)=>{
     }
     return(
         <Card>
+            {errorMessage && <p className={classes.error}>{errorMessage}</p>}
+            {message && <p className={classes.success}>{message}</p>}
+            {isLoading && <p>Loading...</p>}
             <form onSubmit={orderDataHandler}>
                 <Input 
                     type="text" 

@@ -1,32 +1,38 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import useHttp from "../../hook/use-http";
 import Card from "../UI/Card/Card";
 import Item from "./Item/Item";
 import classes from './Meal.module.css';
 
 const Meal = () =>{
     const [mealsItems, setMealItems] = useState([]);
-    useEffect(()=>{
-        fetch('https://mocki.io/v1/7cc40522-db6d-4229-996e-562a1195e532',
-        {
-            methid:'GET',
-            headers:{
-                'Content-Type':'application/JSON'
-            }
-        }).then(response=> response.json())
-        .then(data=>{
-            setMealItems(data)
-        })
+    const getMenuItems =useCallback((data) =>{
+        let meals = []
+        for(let key in data){
+            meals.push(data[key])
+        }
+        setMealItems(meals);
     },[])
+    const {errorMessage, isLoading, sendRequest} = useHttp(getMenuItems);
+
+    useEffect(()=>{
+        sendRequest({URL:'https://react-food-delivery-3d41f-default-rtdb.firebaseio.com/menuItem.json',method: 'GET'});
+
+    },[sendRequest])
+
+
     return(
         <div className={classes['meal_wrapper']}>
+            {errorMessage && <p>{errorMessage}</p>}
+            {isLoading && <p>Loading...</p>}
             <Card>
                 {mealsItems.map((item,index)=>{
                     // console.log(item);
                     return <Item name={item.name} 
                             description={item.description} 
                             price={item.price} 
-                            id={item.id} 
-                            key={item.id}
+                            id={Math.random()} 
+                            key={index}
                             availableQty={+item.availableQty}
                         />
                 })}
